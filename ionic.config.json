@@ -1,0 +1,7 @@
+{
+  "name": "vertice-serguros",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

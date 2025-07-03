@@ -1,0 +1,67 @@
+<div class="overflow-auto">
+    <div class="page-wrapper">
+	<header class="header header-fixed style-1">
+		<div class="header-content">
+			<div class="left-content">
+				<a [routerLink]="['/admin/sypago/data/vertice/user']"  class="back-btn ic-icon icon-sm">
+					<i class="feather icon-arrow-left"></i>
+				</a>
+			</div>
+			<div class="mid-content">
+		        <div class="mid-content"><h5 class="title">Descargar RCV</h5></div>
+			</div>
+		</div>
+	</header>
+        @if(showLoading){
+            <app-spinner />
+          }
+ 
+        <main class="page-content space-top p-b70">
+            <div class="container px-2">
+                <div class="image-container">
+                    <img src="../../../assets/imagenes/vertice2.png" alt="" class="logo">
+                </div>
+                <div class="default-tab style-3">
+                    <div class="tab-content">
+                        <div class="section-head">
+                            <h3 class="title">!RCV emitido!</h3>
+                            <h6>Número de póliza: <span class="number-document">8748548484</span> </h6>
+                        </div>
+                        <p class="text-area-font">No olvides descargar tu RCV en formato PDF o compartirla a través de WhatsApp o correo electrónico.</p>
+
+                        <a class="btn btn-thin btn-primary w-100 text-color-light" (click)="openModal()">Compartir</a>	
+                        <div class="avatar-img">
+                            <img src="../../../../assets/imagenes/avatar3.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>  
+    </div>
+
+    <div *ngIf="isModalOpen" class="modal">
+        <div class="modal-content">
+            <span class="close" (click)="closeModal()">&times;</span>
+            <h3 class="title">Compartir</h3>
+            <div class="share-icons">
+                <a (click)="downloadPolicy()">
+                    <img src="../../../assets/imagenes/icon/Dowloands.png" alt="Dowloands">
+                  </a>
+                <a (click)="shareByWhatsapp()">
+                  <img src="../../../assets/imagenes/icon/wpp.png" alt="WhatsApp">
+                </a>
+                <a (click)="shareByEmail()">
+                  <img src="../../../assets/imagenes/icon/gmail-icon.png" alt="Gmail">
+                </a>
+              </div>
+        </div>
+    </div>
+
+    	<div class="footer-fixed-btn">
+		<div class="inner-area rounded-xl">
+			<a [routerLink]="['/admin/form/cotizacion/vertice/data']" class="btn btn-primary btn-thin rounded-xl gap-3 w-100 btn-shadow text-uppercase text-dark">Salir</a>
+		</div>
+	</div>
+    
+    <div class="toast-container" id="toastContainer"></div>

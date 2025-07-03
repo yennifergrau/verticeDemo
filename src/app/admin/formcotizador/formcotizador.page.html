@@ -1,0 +1,426 @@
+<div class="overflow-auto">
+  <div class="page-wrapper scroll full-height">
+    <header class="header header-fixed style-1">
+      <div class="header-content">
+        <div class="mid-content"><h5 class="title">Datos del Propietario</h5></div>
+        <div class="right-content"></div>
+      </div>
+    </header>
+
+    @if(showLoading){
+      <app-spinner />
+    }
+
+    <main class="page-content space-top p-b70">
+      <div class="container px-2 pb-2">
+        <div class="card style-2">
+          <div class="card-header"></div>
+          <div class="card-body">
+            <form class="ic-form-group"  (ngSubmit)="onSubmit()" #cotizadorForm="ngForm">
+              <div class="ic-list m-b20">
+                <div class="card style-2">
+                  <label class="card-body vehicleOwnership flex items-center gap-2">
+                    <input type="checkbox" [(ngModel)]="esDuenio" name="esDuenio" (change)="toggleDatosTomador()" />
+                    <span class="text-whiter">¿Usted es el dueño del vehículo que desea asegurar?</span>
+                  </label>
+                </div>
+              </div>
+
+              <div *ngIf="esDuenio">
+                <h6 class="card-title">Datos del Tomador</h6>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input        
+                      type="text"
+                      class="form-control"
+                      placeholder="Nombre del Tomador" 
+                      [(ngModel)]="policy_holder"
+                      name="policy_holder"
+                      maxlength="30"
+                      required>								
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input 
+                        type="text" 
+                        class="form-control" 
+                        mask="separator.2"
+                        thousandSeparator="."
+                        inputmode="numeric"
+                        placeholder="Cédula o RIF" 
+                        [(ngModel)]="policy_holder_document_number" name="policy_holder_document_number"
+                        required>								
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="row">
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="tel" class="form-control" placeholder="Teléfono" 
+                        mask="(999)-9999999"
+                        [(ngModel)]="policy_holder_phone" name="policy_holder_phone" maxlength="15">								
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="email" class="form-control" placeholder="Correo electrónico" 
+                        [(ngModel)]="policy_holder_email" name="policy_holder_email" maxlength="50">								
+                    </div>
+                  </div>
+                </div> -->
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control" placeholder="Estado" 
+                        [(ngModel)]="policy_holder_state" name="policy_holder_state" maxlength="50" required>								
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control" placeholder="Ciudad" 
+                        [(ngModel)]="policy_holder_city" name="policy_holder_city" maxlength="50" required>								
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control" placeholder="Municipio" 
+                        [(ngModel)]="policy_holder_municipality" name="policy_holder_municipality" maxlength="50">								
+                    </div>
+                  </div>
+                </div>
+
+                <div class="m-b15 input-group input-lg input-rounded">
+                  <input type="text" class="form-control" placeholder="Dirección completa" 
+                    [(ngModel)]="policy_holder_address" name="policy_holder_address" maxlength="150" required>								
+                </div>
+              </div>
+
+              <!-- Sección de datos del tomador y asegurado (cuando NO es dueño) -->
+              <div *ngIf="!esDuenio">
+                <!-- Formulario del Tomador -->
+                <h6 class="card-title">Datos del Tomador</h6>
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control" placeholder="Nombre del Tomador" 
+                        [(ngModel)]="insured" name="insured" maxlength="30" required>								
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control" placeholder="Cédula/RIF" 
+                        [(ngModel)]="insured_document" name="insured_document" maxlength="30" required>								
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="tel" class="form-control" placeholder="Teléfono" 
+                        mask="(999)-9999999"
+                        [(ngModel)]="insured_phone" name="insured_phone" maxlength="15">								
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="email" class="form-control" placeholder="Correo electrónico" 
+                        [(ngModel)]="insured_email" name="insured_email" maxlength="50">								
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control" placeholder="Estado" 
+                        [(ngModel)]="insured_state" name="insured_state" maxlength="50" required>								
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control" placeholder="Ciudad" 
+                        [(ngModel)]="insured_city" name="insured_city" maxlength="50" required>								
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control" placeholder="Municipio" 
+                        [(ngModel)]="insured_municipality" name="insured_municipality" maxlength="50">								
+                    </div>
+                  </div>
+                </div>
+
+                <div class="m-b15 input-group input-lg input-rounded">
+                  <input type="text" class="form-control" placeholder="Dirección completa" 
+                    [(ngModel)]="insured_address" name="insured_address" maxlength="150" required>								
+                </div>
+
+                <!-- Formulario del Asegurado (dueño del vehículo) -->
+                <h6 class="card-title">Datos del Titular</h6>
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control" placeholder="Nombre del Titular" 
+                        [(ngModel)]="owner_name" name="owner_name" maxlength="30" required>								
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control" placeholder="Cédula/RIF" 
+                        [(ngModel)]="owner_document" name="owner_document" maxlength="30" required>								
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="tel" class="form-control" placeholder="Teléfono" 
+                        mask="(999)-9999999"
+                        [(ngModel)]="owner_phone" name="owner_phone" maxlength="15">								
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="email" class="form-control" placeholder="Correo electrónico" 
+                        [(ngModel)]="owner_email" name="owner_email" maxlength="50">								
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control" placeholder="Estado" 
+                        [(ngModel)]="owner_state" name="owner_state" maxlength="50" required>								
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control" placeholder="Ciudad" 
+                        [(ngModel)]="owner_city" name="owner_city" maxlength="50" required>								
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control" placeholder="Municipio" 
+                        [(ngModel)]="owner_municipality" name="owner_municipality" maxlength="50">								
+                    </div>
+                  </div>
+                </div>
+
+                <div class="m-b15 input-group input-lg input-rounded">
+                  <input type="text" class="form-control" placeholder="Dirección completa" 
+                    [(ngModel)]="owner_address" name="owner_address" maxlength="150" required>								
+                </div>
+              </div>
+
+              <!-- Sección de datos del vehículo -->
+              <div class="card style-2">
+                <div class="card-header">	
+                  <h6 class="card-title">Datos del Vehículo</h6>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="m-t15 m-b15 input-group input-lg input-rounded">
+                      <select class="form-control" [(ngModel)]="placa" name="placa" required>
+                        <option value="" disabled selected>Tipo de placa</option>
+                        <option value="nacional">Nacional</option>
+                        <option value="extranjera">Extranjera</option>
+                      </select>	
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="m-b15 m-t15 input-group input-lg input-rounded">
+                      <input type="number" inputmode="numeric" class="form-control" placeholder="Año" 
+                        [(ngModel)]="ano" name="ano" min="1950" max="2025" required>								
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control" placeholder="Marca" 
+                        [(ngModel)]="marca" name="marca" required>								
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control" placeholder="Modelo" 
+                        [(ngModel)]="modelo" name="modelo" required>								
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control" placeholder="Versión" 
+                        [(ngModel)]="version" name="version">								
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control" placeholder="Placa" 
+                      mask="AAA-AAAA"
+                      [(ngModel)]="number_plate"
+                      name="placa">								
+                    </div>
+                  </div>
+                </div>
+
+                   <div class="row">
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control"       placeholder="Color" 
+                        [(ngModel)]="color"
+                        name="color">								
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                     <select  class="form-control" name="transmision" [(ngModel)]="gearbox">
+                      <option value="" disabled selected>transmisión</option>
+                      <option value="Automática">Automática</option>
+                      <option value="Sincrónica">Sincrónica</option>
+                      <option value="semi-automática">semi-automática</option>
+                     </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control" placeholder="Serial de motor" 
+                      [(ngModel)]="number_serial"
+                      name="number_serial"
+                      >								
+                    </div>
+                  </div>
+                    <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <input type="text" class="form-control" placeholder="Serial de Carroceria" 
+                      [(ngModel)]="number_motor"
+                      name="number_motor"
+                      >								
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                   <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <select class="form-control" [(ngModel)]="tipoVehiculo" name="tipoVehiculo" 
+                        (change)="onTipoVehiculoChange()" required>
+                        <option value="" disabled selected>Tipo de Vehículo</option>
+                        <option value="particular">Particular</option>
+                        <option value="carga">Carga</option>
+                        <option value="autobus">Autobús</option>
+                        <option value="minibus">Minibús</option>
+                        <option value="ruta">Ruta Foránea</option>
+                        <option value="rustico">Rústico</option>
+                        <option value="moto">Motocicleta</option>
+                        <option value="motocarro">Motocarro</option>
+                        <option value="sangre">Tracción Animal</option>
+                        <option value="maquina">Máquina Móvil</option>
+                      </select>							
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded">
+                      <select class="form-control" [(ngModel)]="uso" name="uso" *ngIf="showUso">
+                        <option value="" disabled selected>Tipo de Uso</option>
+                        <option value="particular_1">Hasta 800 kg. de peso</option>
+                        <option value="particular_2">Más de 800 kg. de peso</option>
+                        <option value="particular_3">Casas Móviles con Tracción propia</option>
+                        <option value="particular_4">Auto – Escuela</option>
+                        <option value="particular_5">Alquiler sin chofer</option>
+                        <option value="particular_6">Alquiler con chofer, taxi o por puesto</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="m-b15 input-group input-lg input-rounded" *ngIf="showSubtipo">
+                      <select class="form-control" [(ngModel)]="subtipo" name="subtipo">
+                        <option value="" disabled selected>Subtipo</option>
+                        <option value="urbano">Urbano</option>
+                        <option value="suburbano">Suburbano</option>
+                        <option value="interurbano">Interurbano</option>
+                      </select>
+                    </div>
+                    
+                    <div class="m-b15 input-group input-lg input-rounded" *ngIf="showCarga">
+                      <select class="form-control" [(ngModel)]="subtipoCarga" name="subtipoCarga">
+                        <option value="" disabled selected>Capacidad de carga (TM)</option>
+                        <option value="7">Hasta 2 TM</option>
+                        <option value="8">Más de 2 y hasta 5 TM</option>
+                        <option value="9">Más de 5 hasta 8 TM</option>
+                        <option value="10">Más de 8 hasta 12 TM</option>
+                        <option value="11">Más de 12 TM</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+                 <div class="m-b15 input-group input-lg input-rounded">
+                  <input type="number" class="form-control" 
+                  inputmode="numeric"
+                  placeholder="Capacidad de pasajeros" 
+                    [(ngModel)]="passenger_qty" name="passenger_qty" maxlength="9" required>								
+                </div>
+
+              <!-- Sección de ajustes -->
+              <div class="card-header">	
+                <h6 class="card-title">Ajustes</h6>
+              </div>
+
+              <div class="checkbox-group">
+                <!-- <label class="checkbox-wrapper">
+                  <input type="checkbox" id="peligroso" class="checkbox" [(ngModel)]="peligroso" name="peligroso">
+                  <span class="label-text">Materiales peligrosos (+100%)</span>
+                </label>
+                <label class="checkbox-wrapper">
+                  <input type="checkbox" id="oficial" class="checkbox" [(ngModel)]="oficial" name="oficial">
+                  <span class="label-text">Cuerpos oficiales (+60%)</span>
+                </label>
+                <label class="checkbox-wrapper">
+                  <input type="checkbox" id="remolque" class="checkbox" [(ngModel)]="remolque" name="remolque">
+                  <span class="label-text">Remolque (+20%)</span>
+                </label>
+                <label class="checkbox-wrapper">
+                  <input type="checkbox" id="siniestro" class="checkbox" [(ngModel)]="siniestro" name="siniestro">
+                  <span class="label-text">Siniestro anterior (+20%)</span>
+                </label>
+                <label class="checkbox-wrapper ">
+                  <input type="checkbox" id="descuento" class="checkbox" [(ngModel)]="descuento" name="descuento">
+                  <span class="label-text">Uso autorizado (-40%)</span>
+                </label> -->
+                  <label class="checkbox-wrapper m-b50"  *ngIf="mostrarOpcionGrua()">
+                  <input type="checkbox" id="incluirGrua" class="checkbox" [(ngModel)]="incluirGrua" name="incluirGrua">
+                  <span class="label-text">Incluir Servicio de Grúa</span>
+                </label>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="footer-fixed-btn m-t30">
+      <button type="button" class="btn btn-lg btn-thin btn-primary text-dark w-100 rounded-xl" 
+        (click)="onSubmit()">Cotizar</button>
+    </div>	
+  </div>  
+</div>
+<div class="toast-container" id="toastContainer"></div>

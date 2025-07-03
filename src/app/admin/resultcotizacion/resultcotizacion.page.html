@@ -1,0 +1,102 @@
+
+<div class="overflow-auto">
+<div class="page-wrapper">
+    
+	<!-- Header -->
+	<header class="header header-fixed style-1">
+		<div class="header-content">
+			<div class="left-content">
+				<a [routerLink]="['/admin/form/cotizacion/vertice/data']"  class="back-btn ic-icon icon-sm">
+					<i class="feather icon-arrow-left"></i>
+				</a>
+			</div>
+			<div class="mid-content">
+		        <div class="mid-content"><h5 class="title">Resumen de cotización</h5></div>
+			</div>
+		</div>
+	</header>
+	<!-- Header -->
+	
+	<!-- Main Content Start -->
+	<main class="page-content space-top p-b80">
+		<div class="container p-2">
+			<div class="ic-product-preview">
+				<div class="ic-media">
+					<img src="../../../assets/imagenes/vertice2.png" alt="">
+				</div>
+				<div class="detail-content">
+					<h5 class="title">R.C.V</h5>
+					<div class="ic-prize">
+						<span class="name">Precio</span>
+						<span class="prize font1">$ {{ formatCurrency(ultimaCotizacion.resultado.primaTotal.dolar) }} / BS {{ formatCurrency(ultimaCotizacion.resultado.primaTotal.bs) }}</span>
+					</div>
+				</div>
+				
+			</div>
+	<div class="ic-product-detail">
+				<ul class="product-info style-2">
+					<li class="info-box">
+						<i class="fas fa-car color"></i>
+						<div class="content">
+							<h5 class="title font">Daño a cosas</h5>
+							<p>$ {{formatCurrency(ultimaCotizacion.resultado.danosCosas.dolar)}}</p>
+						</div>	
+					</li>
+					<li class="info-box">
+						<i class="fas fa-briefcase-medical color"></i>
+						<div class="content">
+							<h5 class="title font">Daño a personas</h5>
+							<p>$ {{formatCurrency(ultimaCotizacion.resultado.danosPersonas.dolar)}}</p>
+						</div>	
+					</li>
+	
+				</ul>
+			</div>
+			<div class="ic-product-detail">
+		
+
+				<div class="card style-2 mb-0">
+					<div class="card-header">
+						<h6 class="card-title">Mas Información:</h6>
+					</div>
+					<div class="card-body">
+						<ul class="specification-list">
+							<li>
+								<span class="name">Nombre</span>
+								<span class="property">{{this.dataUsuario.generalData.policy_holder}}</span>
+							</li>
+							<li>
+								<span class="name">Tipo de placa</span>
+								<span class="property">{{this.dataUsuario.carData.type_plate}}</span>
+							</li>
+							<li>
+								<span class="name">Año</span>
+								<span class="property">{{this.dataUsuario.carData.year}}</span>
+							</li>
+							<li>
+								<span class="name">Marca/Modelo</span>
+								<span class="property">{{this.dataUsuario.carData.brand + ' ' + this.dataUsuario.carData.model}}</span>
+							</li>
+							<li>
+								<span class="name">Tipo de vehículo</span>
+								<span class="property">{{this.dataUsuario.carData.use}}</span>
+							</li>
+									<li>
+								<span class="name">Placa del vehículo</span>
+								<span class="property">{{this.dataUsuario.carData.plate}}</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<!-- Main Content End -->
+
+	<div class="footer-fixed-btn">
+		<div class="inner-area rounded-xl">
+			<a [routerLink]="['/admin/sypago/data/vertice/user']" class="btn btn-primary btn-thin rounded-xl gap-3 w-100 btn-shadow text-uppercase text-dark">Comprar</a>
+		</div>
+	</div>
+</div>  
+</div>

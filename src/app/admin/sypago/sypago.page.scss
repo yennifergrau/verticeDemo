@@ -1,0 +1,124 @@
+  .bottom-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: start;
+  }
+
+  .fondo{
+    background-color: #c0c1c2;
+  }
+
+  .payment-card .card-content {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+  select#document_prefix {
+    height: 100%;
+    background: white;
+    border-radius: 0 !important;
+    border-left: 0px !important;
+    border-right: 0px !important;
+    .input-group:focus-within & {
+      border-color: var(--primary) !important;
+    }
+  }
+
+  input {
+    .input-group:focus-within & {
+      border-color: var(--primary)  !important;
+    }
+  }
+
+  .text-dark {
+  color: #ffffff !important;
+}
+
+
+  .invalid-input{
+    border: 2px solid red !important;
+  background-color: #f8d7da;
+  }
+
+  .text-color-light{
+    color: var(--light);
+}
+
+.text-color-font{
+    color: var(--pink);
+}
+
+.btn-link-active{
+    font-size: 12px;
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.text-area-font{
+    font-size: 12px !important;
+    font-weight: 700 !important;
+}
+
+.border-info{
+    border:1px solid var(--pink) !important;
+}
+
+.bank-style{
+    border-radius: 10px !important;
+    z-index: 100;
+}
+
+.title-secondary{
+    margin-left: 20px;
+}
+
+.background-timelink{
+    background-color: var(--primary) !important;
+}
+.separe{
+    margin-right: 10px !important;
+}
+
+
+  
+  .ic-bank-list {
+    display: flex;
+    align-items: center;
+    gap: 20px; // Espacio entre imágenes
+
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+  
+    li {
+  
+      img {
+        width: 100px; // Ajusta el tamaño según necesites
+        height: auto;
+        display: block;
+      }
+    }
+  
+    // Animación para el desplazamiento infinito
+    @keyframes scrollBanks {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+  
+    animation: scrollBanks 20s linear infinite; // Ajusta la duración según prefieras
+  }
+  
+  // Duplicar la lista para efecto de desplazamiento continuo
+  .ic-bank-list::after {
+    content: "";
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    animation: scrollBanks 20s linear infinite;
+  }
+
