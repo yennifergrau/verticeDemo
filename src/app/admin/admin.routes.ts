@@ -4,6 +4,7 @@ import { ResultcotizacionPage } from "./resultcotizacion/resultcotizacion.page";
 import { SypagoPage } from "./sypago/sypago.page";
 import { SypagotpPage } from "./sypagotp/sypagotp.page";
 import { ConfirmedPage } from "./confirmed/confirmed.page";
+import { RcvPage } from "../pages/ocr/views/rcv/rcv.page";
 
 export const ADMIN_ROUTES : Routes = [
     {
@@ -13,6 +14,10 @@ export const ADMIN_ROUTES : Routes = [
     {
         path:'result/cotizacion/vertice/data',
         component:ResultcotizacionPage
+    },
+    {
+        path:'confirmed/data/rcv/user',
+        component:RcvPage
     },
     {
         path:'sypago/data/vertice/user',
