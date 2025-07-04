@@ -24,8 +24,6 @@ export class GetsetService {
     return JSON.parse(localStorage.getItem('dataUser') || '');
   }
 
-
-
   set dataCotizador(value: string) {
     localStorage.setItem('dataCotizador', JSON.stringify(value));
   }

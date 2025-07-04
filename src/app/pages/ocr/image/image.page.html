@@ -1,0 +1,43 @@
+<ion-content>
+  <div class="body">
+    <div class="container">
+      <img src="../../../../assets/images/logo_polizaqui.jpeg" alt="PolizaAqui Logo">
+      <h1>Escanear documento</h1>
+      <div class="instructions">
+        <ul class="instruction-steps">
+            <li>Coloca el documento sobre una superficie plana y bien iluminada.</li>
+            <li>Evita el uso de flash, ya que puede generar reflejos que dificultan la lectura.</li>
+            <li>Asegúrate de que el documento esté completamente visible en la cámara.</li>
+            <li>Mantén la cámara estable y a una distancia adecuada para que el texto sea nítido.</li>
+            <li>Presiona "Capturar" cuando estés listo para obtener la imagen.</li>
+        </ul>
+    </div>
+
+      <div class="camera">
+        <video id="video" autoplay playsinline></video>
+    </div>
+
+    @if(showLoading){
+      <div class="spinner">
+        <app-spinner />
+      </div>
+    }  
+    <p class="progress-message" [ngStyle]="{ 'display': messageInformation ? 'inline-block' : 'none' }">Procesando documento, por favor espera...</p>
+
+      <div class="button-container">
+        <button class="button cancel" (click)="RoutingNavigate()">Cancelar</button>
+        <button 
+        [ngClass]="{'grey-button': messageInformation, 'pink-button': !messageInformation}"
+
+        class="button accept" (click)="capturePhoto()">{{ messageInformation ? 'Capturando...' : 'Capturar' }}</button>
+      </div>
+      <br>
+
+
+    </div>
+    <footer>
+      <p>&copy; 2024 PolizAqui. Todos los derechos reservados. <a href="term-policy-dev">Términos y Condiciones</a></p>
+    </footer>
+  </div>
+  <script async src="https://docs.opencv.org/3.4.0/opencv.js"></script>
+</ion-content>

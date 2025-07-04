@@ -100,6 +100,18 @@ export class FormcotizadorPage implements OnInit {
   coberturaDatos: any = { cosas: 0, personas: 0 };
   coberturaDolar: any = { cosas: '0', personas: '0' };
   coberturaBs: any = { cosas: '0', personas: '0' };
+  vehiculos: any = { 
+    'ruta': 'Ruta Foránea',
+    'particular': 'Particular',
+    'carga': 'Carga',
+    'autobus':'Autobús',
+    'minibus':'Minibús',
+    'rustico':'Rústico',
+    'moto':'Motocicleta',
+    'motocarro':'Motocarro',
+    'sangre':'Tracción Animal',
+    'maquina':'Máquina Móvil'
+  }
 
   constructor(
     private cotizacionService: GetsetService,
@@ -196,16 +208,17 @@ export class FormcotizadorPage implements OnInit {
   }
 
   public onTipoVehiculoChange() {
-  const tipo = this.tipoVehiculo;
-  this.showSubtipo = tipo === 'autobus' || tipo === 'minibus';
-  this.showCarga = tipo === 'carga';
-  const sinUso = ['autobus', 'minibus', 'carga', 'ruta', 'rustico', 'moto', 'motocarro', 'sangre', 'maquina'];
-  this.showUso = !sinUso.includes(tipo);
+    const tipo = this.tipoVehiculo;
+    this.showSubtipo = tipo === 'autobus' || tipo === 'minibus';
+    this.showCarga = tipo === 'carga';
+    const sinUso = ['autobus', 'minibus', 'carga', 'ruta', 'rustico', 'moto', 'motocarro', 'sangre', 'maquina'];
+    this.showUso = !sinUso.includes(tipo);
 
-  if (!this.showSubtipo) this.subtipo = '';
-  if (!this.showCarga) this.subtipoCarga = '';
-  this.incluirGrua = false;
-}
+    if (!this.showSubtipo) this.subtipo = '';
+    if (!this.showCarga) this.subtipoCarga = '';
+    this.incluirGrua = false;
+
+  }
 
   public onSubmit() {
 
@@ -292,6 +305,7 @@ export class FormcotizadorPage implements OnInit {
   };
 
   this.mostrarResultado = true;
+  
   this.guardarCotizacion(totalEuro, totalUSD, totalBs);
 }
 
@@ -338,7 +352,7 @@ private guardarCotizacion(totalEuro: number, totalUSD: number, totalBs: number) 
       gearbox: this.gearbox,
       carroceria_serial_number: this.number_serial,
       motor_serial_number: this.number_motor,
-      type_vehiculo: this.tipoVehiculo,
+      type_vehiculo: this.vehiculos[this.tipoVehiculo],
       use: this.subtipoCarga || this.subtipo || this.uso || '',
       passenger_qty: this.passenger_qty,
       driver: this.policy_holder || this.owner_name,
@@ -426,6 +440,8 @@ private guardarCotizacion(totalEuro: number, totalUSD: number, totalBs: number) 
       claseGrupo = subtipo === "suburbano" ? "minibus_16"
                  : subtipo === "interurbano" ? "minibus_17"
                  : "minibus_15";
+    } else if (tipo === "ruta") {
+      claseGrupo = "ruta_18";
     } else if (tipo === "rustico") {
       claseGrupo = "rustico_19";
     } else if (tipo === "moto") {
@@ -460,6 +476,7 @@ private guardarCotizacion(totalEuro: number, totalUSD: number, totalBs: number) 
     minibus_15: { primaAnualEUR: 75, extranjera: { primaAnualEUR: 273 }, servicioGruaUSD: 0 },
     minibus_16: { primaAnualEUR: 75, extranjera: { primaAnualEUR: 273 }, servicioGruaUSD: 0 },
     minibus_17: { primaAnualEUR: 168, extranjera: { primaAnualEUR: 611 }, servicioGruaUSD: 0 },
+    ruta_18: { primaAnualEUR: 75, extranjera: { primaAnualEUR: 273 }, servicioGruaUSD: 0 },
     rustico_19: { primaAnualEUR: 75, extranjera: { primaAnualEUR: 273 }, servicioGruaUSD: 100 },
     moto_20: { primaAnualEUR: 15, extranjera: { primaAnualEUR: 55 }, servicioGruaUSD: 80 },
     motocarro_21: { primaAnualEUR: 21, extranjera: { primaAnualEUR: 76 }, servicioGruaUSD: 80 },
@@ -539,6 +556,10 @@ private getCoberturas() {
     minibus_17: { 
       danosCosasEUR: isExtranjera ? 12523 : 2505, 
       danosPersonasEUR: isExtranjera ? 18769 : 3754 
+    },
+    ruta_18: { 
+      danosCosasEUR: isExtranjera ? 9369 : 1874, 
+      danosPersonasEUR: isExtranjera ? 14084 : 2817 
     },
     rustico_19: { 
       danosCosasEUR: isExtranjera ? 9369 : 1874, 
